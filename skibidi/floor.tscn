@@ -1,11 +1,80 @@
-[gd_scene load_steps=6 format=3 uid="uid://c014cvgf3t4ki"]
+[gd_scene load_steps=15 format=3 uid="uid://c014cvgf3t4ki"]
 
-[ext_resource type="Script" path="res://CharacterBody2D.gd" id="1_vmmnk"]
-[ext_resource type="Texture2D" uid="uid://b4j42le1fkuoa" path="res://images.jpeg" id="2_tr28k"]
+[ext_resource type="Script" path="res://player.gd" id="1_vmmnk"]
+[ext_resource type="Texture2D" uid="uid://hm1xbdiy70l7" path="res://egg007.png" id="2_41t5a"]
+[ext_resource type="Texture2D" uid="uid://cv3pueqiha6jb" path="res://gregg-eggfley.png" id="2_lherg"]
 [ext_resource type="Texture2D" uid="uid://bxcsqhh00e4i7" path="res://wood.jpeg" id="3_vwyl1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p061j"]
 size = Vector2(122, 159)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n2dq"]
+atlas = ExtResource("2_lherg")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x04qt"]
+atlas = ExtResource("2_lherg")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7crqh"]
+atlas = ExtResource("2_lherg")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aiiuy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n2dq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x04qt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7crqh")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2x3jf"]
+atlas = ExtResource("2_41t5a")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qixsl"]
+atlas = ExtResource("2_41t5a")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip3lo"]
+atlas = ExtResource("2_41t5a")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1o53h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2x3jf")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qixsl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ip3lo")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0n2kd"]
 size = Vector2(795.25, 116)
@@ -13,19 +82,40 @@ size = Vector2(795.25, 116)
 [node name="Node2D" type="Node2D"]
 position = Vector2(-1, 0)
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(556, 125)
+[node name="player1" type="CharacterBody2D" parent="."]
+position = Vector2(552, 165)
 script = ExtResource("1_vmmnk")
+SPEED = 700.0
+JUMP_VELOCITY = -1000.0
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player1"]
 position = Vector2(3, -1.5)
 shape = SubResource("RectangleShape2D_p061j")
 
-[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
-position = Vector2(3, -1.99999)
-scale = Vector2(0.612245, 0.620155)
-texture = ExtResource("2_tr28k")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player1"]
+position = Vector2(8.50001, -14)
+scale = Vector2(2.98, 3.68)
+sprite_frames = SubResource("SpriteFrames_aiiuy")
+animation = &"idle"
+
+[node name="player2" type="CharacterBody2D" parent="."]
+position = Vector2(718, 172)
+script = ExtResource("1_vmmnk")
+SPEED = 700.0
+JUMP_VELOCITY = -1000.0
+player_num = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player2"]
+position = Vector2(3, -1.5)
+shape = SubResource("RectangleShape2D_p061j")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="player2"]
+position = Vector2(8.50001, -14)
+scale = Vector2(2.98, 3.68)
+sprite_frames = SubResource("SpriteFrames_1o53h")
+animation = &"idle"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(565, 375)

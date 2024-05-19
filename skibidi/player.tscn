@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://bvyq05bymptcj"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_c885x"]
+[ext_resource type="Texture2D" uid="uid://cv3pueqiha6jb" path="res://gregg-eggfley.png" id="2_siykx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frxi7"]
+size = Vector2(122, 159)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n2dq"]
+atlas = ExtResource("2_siykx")
+region = Rect2(0, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x04qt"]
+atlas = ExtResource("2_siykx")
+region = Rect2(50, 0, 50, 50)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7crqh"]
+atlas = ExtResource("2_siykx")
+region = Rect2(100, 0, 50, 50)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_emj5x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n2dq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x04qt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7crqh")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_c885x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(555, 163.5)
+shape = SubResource("RectangleShape2D_frxi7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(560.5, 151)
+scale = Vector2(2.98, 3.68)
+sprite_frames = SubResource("SpriteFrames_emj5x")
+animation = &"idle"
